@@ -31,11 +31,19 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    #apps
+    'transactions.apps.TransactionsConfig',
+
+    #packages
+    'rest_framework',
+
 ]
 
 MIDDLEWARE = [
@@ -80,6 +88,16 @@ DATABASES = {
 }
 MONGO_DB_URI = "mongodb://shahab:123@localhost:27017/admin"
 MONGO_DB_NAME = "zibal_db"
+
+MONGODB = {
+    'db': 'zibal_db',
+    'host': 'localhost',
+    'port': 27017,
+    'username': 'shahab',
+    'password': '123',
+    'authentication_source': 'admin'
+}
+
 
 
 # Password validation

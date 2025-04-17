@@ -1,3 +1,13 @@
-from django.db import models
+from mongoengine import Document, fields
 
-# Create your models here.
+class Transaction(Document):
+    merchantId = fields.StringField(required=True)
+    amount = fields.IntField(required=True)
+    createdAt = fields.DateTimeField(required=True)
+
+    meta = {
+        'indexes': [
+            'merchantId',
+            'createdAt',
+        ]
+    }
