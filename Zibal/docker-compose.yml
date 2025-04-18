@@ -9,9 +9,25 @@ services:
       - .:/app
     environment:
       - PYTHONUNBUFFERED=1
+      - MONGO_URI=mongodb://shahab:123@localhost:27017/admin
     networks:
       - zibal-network
+    depends_on:
+      - mongo
+
+  mongo:
+    image: mongo:latest
+    container_name: mongo-db
+    ports:
+      - "27018:27017"
+    networks:
+      - zibal-network
+    volumes:
+      - mongo-data:/data/db
 
 networks:
   zibal-network:
     driver: bridge
+
+volumes:
+  mongo-data:

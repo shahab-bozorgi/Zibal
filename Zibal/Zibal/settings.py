@@ -11,9 +11,8 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 import os
 from pathlib import Path
-from dotenv import load_dotenv
 
-load_dotenv()
+from mongoengine import connect
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -21,12 +20,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.getenv('SECRET_KEY')
+SECRET_KEY = 'django-insecure-i*ur1s--)8=2kq_6i_a39wgkoly#*ejj+g5tznl9o1_9a3rfw0'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.getenv('DEBUG') == 'True'
-ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', '*').split(',')
-
+DEBUG = True
+ALLOWED_HOSTS = ['*']  # به جای * می‌توانید یک لیست از دامنه‌های مجاز وارد کنید
 
 # Application definition
 
@@ -85,20 +83,17 @@ DATABASES = {
     }
 }
 
-MONGO_DB_URI = os.getenv('MONGO_DB_URI')
-MONGO_DB_NAME = os.getenv('MONGO_DB_NAME')
 
 MONGODB = {
-    'db': os.getenv('MONGODB_DB'),
-    'host': os.getenv('MONGODB_HOST'),
-    'port': int(os.getenv('MONGODB_PORT', 27017)),
-    'username': os.getenv('MONGODB_USERNAME'),
-    'password': os.getenv('MONGODB_PASSWORD'),
-    'authentication_source': os.getenv('MONGODB_AUTH_SOURCE'),
+    'db': 'zibal_db',
+    'host': 'localhost',
+    'port': 27017,
+    'username': 'shahab',
+    'password': '123',
+    'authentication_source': 'admin'
+
+
 }
-
-
-
 # Password validation
 # https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators
 
