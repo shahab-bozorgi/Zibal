@@ -9,23 +9,23 @@ https://docs.djangoproject.com/en/5.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.2/ref/settings/
 """
-
+import os
 from pathlib import Path
+from dotenv import load_dotenv
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
+load_dotenv()
+
 BASE_DIR = Path(__file__).resolve().parent.parent
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-i*ur1s--)8=2kq_6i_a39wgkoly#*ejj+g5tznl9o1_9a3rfw0'
+SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-ALLOWED_HOSTS = []
+DEBUG = os.getenv('DEBUG') == 'True'
+ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', '*').split(',')
 
 
 # Application definition
@@ -43,7 +43,6 @@ INSTALLED_APPS = [
 
     #packages
     'rest_framework',
-
 ]
 
 MIDDLEWARE = [
@@ -61,8 +60,7 @@ ROOT_URLCONF = 'Zibal.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates']
-        ,
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -86,20 +84,17 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-MONGO_DB_URI = "mongodb://shahab:123@localhost:27017/admin"
-MONGO_DB_NAME = "zibal_db"
-# from mongoengine import connect
 
-# connect('zibal_db', host='mongodb://shahab:123@localhost:27017/admin')
+MONGO_DB_URI = os.getenv('MONGO_DB_URI')
+MONGO_DB_NAME = os.getenv('MONGO_DB_NAME')
 
 MONGODB = {
-    'db': 'zibal_db',
-    'host': 'localhost',
-    'port': 27017,
-    'username': 'shahab',
-    'password': '123',
-    'authentication_source': 'admin',
-
+    'db': os.getenv('MONGODB_DB'),
+    'host': os.getenv('MONGODB_HOST'),
+    'port': int(os.getenv('MONGODB_PORT', 27017)),
+    'username': os.getenv('MONGODB_USERNAME'),
+    'password': os.getenv('MONGODB_PASSWORD'),
+    'authentication_source': os.getenv('MONGODB_AUTH_SOURCE'),
 }
 
 

@@ -28,20 +28,17 @@ class FastTransactionReportView(APIView):
         serializer.is_valid(raise_exception=True)
         data = serializer.validated_data
 
-        # تبدیل merchantId به ObjectId در صورتی که رشته باشد
         try:
             merchant_id = ObjectId(data['merchantId'])
         except Exception as e:
             raise NotFound(detail="Merchant ID is invalid or not found")
 
-        # جستجو در پایگاه داده برای داده‌های خلاصه
         summary = TransactionSummary.objects(
             merchantId=merchant_id,
             mode=data['mode'],
             type=data['type']
         ).first()
 
-        # اگر داده‌ای یافت نشد، یک پیغام مناسب به کاربر نمایش داده می‌شود
         if summary:
             return Response(summary.data)
         else:

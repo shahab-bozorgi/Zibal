@@ -1,0 +1,17 @@
+services:
+  web:
+    build: .
+    command: gunicorn --bind 0.0.0.0:8000 Zibal.wsgi:application
+    container_name: zibal-app
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/app
+    environment:
+      - PYTHONUNBUFFERED=1
+    networks:
+      - zibal-network
+
+networks:
+  zibal-network:
+    driver: bridge
