@@ -88,6 +88,9 @@ DATABASES = {
 }
 MONGO_DB_URI = "mongodb://shahab:123@localhost:27017/admin"
 MONGO_DB_NAME = "zibal_db"
+# from mongoengine import connect
+
+# connect('zibal_db', host='mongodb://shahab:123@localhost:27017/admin')
 
 MONGODB = {
     'db': 'zibal_db',
@@ -95,7 +98,8 @@ MONGODB = {
     'port': 27017,
     'username': 'shahab',
     'password': '123',
-    'authentication_source': 'admin'
+    'authentication_source': 'admin',
+
 }
 
 
